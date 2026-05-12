@@ -1,285 +1,88 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Entre</title>
-    <link rel="icon" type="image/png" href="./Imagens/Logo-clean.png">
-    <script src="./JavaScript/index.js"></script>
-    <link rel="stylesheet" href="./Css/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Capacitação</title>
+  <link rel="icon" type="image/png" href="./Imagens/Logo-clean.png">
+  <link rel="stylesheet" href="./Css/index.css">
+  <style>
+    .lead { color: var(--muted); font-size: 1.05rem; margin-top: 8px; }
+    .section { margin-bottom: 28px; }
+    .cta { display:flex; justify-content:center; margin-top:20px; }
+    .cta a { text-decoration:none; }
+    .content-wrap { max-width: 980px; margin: 36px auto; padding: 24px; }
+  </style>
 </head>
 <body>
-    <header class="topbar">
-        <a class="brand" href="#">
-            <img src="./Imagens/Logo.png" alt="AsmoSul Logo" class="logo-img">
-        </a>
-        <nav class="nav">
-            <button type="button" class="tablinks active" onclick="openCity(event, 'Cadastrar')">Cadastrar</button>
-            <button type="button" id="navConta" class="tablinks" onclick="openCity(event, 'Conta')">Conta</button>
-            <button type="button" class="tablinks" onclick="openCity(event, 'Perfil')">Perfil</button>
-            <button type="button" class="tablinks" onclick="openCity(event, 'Quadra')">Quadra</button>
-            <button type="button" class="tablinks" onclick="openCity(event, 'FaixaRenda')">Faixa de renda</button>
-            <button type="button" class="tablinks" onclick="openCity(event, 'Comorbidade')">Comorbidade</button>
-            <button type="button" class="tablinks" onclick="openCity(event, 'Categoria')">Categoria</button>
-        </nav>
-    </header>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <img src="./Imagens/Logo.png" alt="AsmoSul Logo" class="logo-img">
+    </a>
+    <nav class="nav">
+      <button type="button" class="tablinks" onclick="location.href='index.html'">Voltar</button>
+    </nav>
+  </header>
 
-    <main class="hero">
-        <div class="hero-content">
-            <section class="hero-copy">
-                <span class="badge">Cadastro social</span>
-                <h1>Organize seus dados com um visual limpo, moderno e confiável.</h1>
-                <p>
-                    Preencha seu cadastro, crie sua conta e valide sua senha com segurança.
-                    O layout segue o estilo de referência, com cores claras, azul de destaque e cards com sombra.
-                </p>
-                <div class="actions">
-                    <button type="button" class="primary-button" onclick="openCity(event, 'Cadastrar')">Começar cadastro</button>
-                    <button type="button" class="secondary-button" onclick="openCity(event, 'Conta')">Ir para conta</button>
-                </div>
-            </section>
+  <main class="hero">
+    <div class="hero-content">
+      <section class="hero-copy content-wrap progress-card" style="display:block;">
+        <span class="badge">Projeto ASMOSUL</span>
+        <h1>Capacitação para fortalecer a comunidade de Palmas - TO</h1>
+        <p class="lead">A ASMOSUL promove capacitação prática e gratuita para moradores de Palmas. Nosso objetivo é gerar autonomia, fomentar renda e fortalecer redes de apoio por meio de oficinas, cursos e mentorias adaptadas às necessidades locais.</p>
 
-            <section class="hero-stats">
-                <section id="Cadastrar" class="tabcontent progress-card" style="display:block;">
-                    <h2>Cadastro</h2>
-                    <p>Preencha seus dados principais para seguir.</p>
-                    <form id="cadastroForm" action="./index.html" method="post" target="_blank">
-                <div class="DivNome">
-                    <label for="nome">Nome *</label>
-                    <input type="text" name="nome" required>
-                </div>
-                <div>
-                    <label for="cpf">CPF *</label>
-                    <input type="text" name="cpf" minlength="11" maxlength="14" required>
-                </div>
-                <div>
-                    <label for="date">Data de nascimento *</label>
-                    <input type="date" name="date" required>
-                </div>
-                <div>
-                    <label for="sexo">Sexo</label>
-                    <select name="select">
-                        <option value="sexo">  </option>
-                        <option value="masculino">Masculino</option>
-                        <option value="feminino">Feminino</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="telefone">Telefone</label>
-                    <input type="tel" name="telefone" maxlength="15"
-                    onkeyup="mascaraTelefone(event)"
-                    placeholder="(##) #####-####">
-                </div>
-                <div>
-                    <label for="email">E-Mail *</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div>
-                    <label for="escolaridade">Escolaridade</label>
-                    <select name="select">
-                        <option value="escolaridade"> - </option>
-                        <option value="analfabeto">Analfabeto</option>
-                        <option value="ensino fundamental incompleto">Ensino fundamental incompleto</option>
-                        <option value="ensino fundamental completo">Ensino fundamental completo</option>
-                        <option value="ensino médio incompleto">Ensino médio incompleto</option>
-                        <option value="ensino médio completo">Ensino médio completo</option>
-                        <option value="ensino superior incompleto">Ensino superior incompleto</option>
-                        <option value="ensino superior completo">Ensino superior completo</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="profissao">Profissão</label>
-                    <input type="text" name="profissao">
-                </div>
-                <div>
-                    <label for="quadra">Quadra</label>
-                    <input type="text" name="quadra">
-                </div>
-                <div>
-                    <label for="rua">Rua</label>
-                    <input type="text" name="Rua">
-                </div>
-                <div>
-                    <label for="lote">Lote</label>
-                    <input type="text" name="lote">
-                </div>
-                <div>
-                    <label for="Complemento de Endereço">Complemento de Endereço</label>
-                    <input type="text" name="Complemento de Endereço">
-                </div>
-                <div>
-                    <label for="Renda">Renda Familiar</label>
-                    <select name="Renda">
-                        <option value="Renda"> - </option>
-                        <option value="2000">Até R$2000,00</option>
-                        <option value="4000">Até R$4000,00</option>
-                        <option value="8000">Até R$8000,00</option>
-                        <option value="10000">Até R$10000,00</option>
-                        <option value="11000">Acima de R$10000,00</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="comorbidade">Possui comorbidades?</label>
-                    <select name="comorbidade" id="Sim">
-                        <option value="comorbidade">  </option>
-                        <option value="sim">Sim</option>
-                        <option value="nao">Não</option>
-                    </select>
-                    <div id="comorbidadeDetalhes" style="display:none; margin-top:8px;">
-                        <label for="detalhes">Quais comorbidades?</label>
-                        <input type="text" name="detalhes" id="detalhes" placeholder="Descreva aqui">
-                    </div>
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Avançar">
-                </div>
-            </form>
-        </section>
-
-                <section id="Conta" class="tabcontent progress-card">
-                    <h2>Conta</h2>
-                    <p>Crie sua senha com confirmação e critérios visíveis.</p>
-                    <form id="contaForm" action="#">
-                <div>
-                    <label for="associada">Pessoa associada</label>
-                    <select name="associada" id="">
-                        <option value="associada">  </option>
-                        <option value="sim">Sim</option>
-                        <option value="nao">Não</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="nome">Nome do usúario *</label>
-                    <input type="text" name="nome" required>
-                </div>
-                <div>
-                    <label for="senha">Senha *</label>
-                    <input type="password" name="senha" id="senha" required minlength="8">
-                </div>
-                <div>
-                    <label for="senhaC">Confirmar Senha *</label>
-                    <input type="password" name="senhaC" id="senhaC" required minlength="8">
-                </div>
-                <div id="passwordFeedback" aria-live="polite" style="margin-top:8px;"></div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Avançar">
-                </div>
-            </form>
-                </section>
-
-                <section id="Perfil" class="tabcontent progress-card">
-                    <h2>Perfil</h2>
-                    <p>Configure seus dados de perfil e permissões.</p>
-                    <form id="perfilForm" action="#">
-                <div>
-                    <label for="identificador">Identificador *</label>
-                    <input type="text" name="identificador" id="identificador" required>
-                </div>
-                <div>
-                    <label for="descricao">Descrição *</label>
-                    <input type="text" name="descricao" id="descricao" required>
-                </div>
-                <div>
-                    <label for="permissoes">Permissões *</label>
-                    <select name="permissoes" id="permissoes" required>
-                        <option value=""> - </option>
-                        <option value="admin">Administrador</option>
-                        <option value="user">Usuário</option>
-                        <option value="viewer">Visualizador</option>
-                        <option value="editor">Editor</option>
-                    </select>
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Salvar">
-                </div>
-            </form>
-                </section>
-
-                <section id="Quadra" class="tabcontent progress-card">
-                    <h2>Quadra</h2>
-                    <p>Cadastre a quadra com nome e descrição.</p>
-                    <form id="quadraForm" action="#">
-                <div>
-                    <label for="nomeQuadra">Nome da quadra *</label>
-                    <input type="text" name="nomeQuadra" id="nomeQuadra" required>
-                </div>
-                <div>
-                    <label for="descricaoQuadra">Descrição</label>
-                    <input type="text" name="descricaoQuadra" id="descricaoQuadra">
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Salvar">
-                </div>
-            </form>
-                </section>
-
-                <section id="FaixaRenda" class="tabcontent progress-card">
-                    <h2>Faixa de renda familiar</h2>
-                    <p>Informe a faixa com valor mínimo, valor máximo e descrição.</p>
-                    <form id="faixaRendaForm" action="#">
-                <div>
-                    <label for="valorMinimo">Valor mínimo *</label>
-                    <input type="number" name="valorMinimo" id="valorMinimo" step="1" min="0" required>
-                </div>
-                <div>
-                    <label for="valorMaximo">Valor máximo *</label>
-                    <input type="number" name="valorMaximo" id="valorMaximo" step="1" min="0" required>
-                </div>
-                <div>
-                    <label for="descricaoFaixa">Descrição</label>
-                    <input type="text" name="descricaoFaixa" id="descricaoFaixa">
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Salvar">
-                </div>
-            </form>
-                </section>
-
-                <section id="Comorbidade" class="tabcontent progress-card">
-                    <h2>Comorbidade</h2>
-                    <p>Cadastre uma comorbidade e associe uma categoria.</p>
-                    <form id="comorbidadeForm" action="#">
-                <div>
-                    <label for="nomeComorbidade">Nome *</label>
-                    <input type="text" name="nomeComorbidade" id="nomeComorbidade" required>
-                </div>
-                <div>
-                    <label for="descricaoComorbidade">Descrição</label>
-                    <input type="text" name="descricaoComorbidade" id="descricaoComorbidade">
-                </div>
-                <div>
-                    <label for="categoriaComorbidade">Categoria *</label>
-                    <select name="categoriaComorbidade" id="categoriaComorbidade" required>
-                        <option value=""> - </option>
-                        <option value="categoria-a">Categoria A</option>
-                        <option value="categoria-b">Categoria B</option>
-                        <option value="categoria-c">Categoria C</option>
-                    </select>
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Salvar">
-                </div>
-            </form>
-                </section>
-
-                <section id="Categoria" class="tabcontent progress-card">
-                    <h2>Categoria</h2>
-                    <p>Cadastre a categoria com identificador e nome.</p>
-                    <form id="categoriaForm" action="#">
-                <div>
-                    <label for="identificadorCategoria">Identificador *</label>
-                    <input type="text" name="identificadorCategoria" id="identificadorCategoria" required>
-                </div>
-                <div>
-                    <label for="nomeCategoria">Nome *</label>
-                    <input type="text" name="nomeCategoria" id="nomeCategoria" required>
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Salvar">
-                </div>
-            </form>
-                </section>
-            </section>
+        <div class="section">
+          <h2>O que é capacitação?</h2>
+          <p class="lead">São treinamentos práticos e oficinas que desenvolvem competências técnicas e comportamentais. Priorizamos conteúdos aplicáveis, empreendedorismo local, cultivo urbano, manutenção, tecnologia e alfabetização digital  para transformar oportunidades em resultados reais.</p>
         </div>
-    </main>
-    </body>
+
+        <div class="section">
+          <h2>Como isso ajuda o projeto</h2>
+          <p class="lead">Capacitação aumenta empregabilidade, fomenta microempreendimentos e fortalece o tecido social. Participantes formam redes de apoio e contribuem para iniciativas locais multiplicando o impacto do projeto na cidade.</p>
+        </div>
+
+        <div class="section">
+          <h2>Programas e formatos</h2>
+          <ul class="lead">
+            <li>Oficinas práticas (horta comunitária, artesanato, manutenção)</li>
+            <li>Curso de empreendedorismo e gestão de pequenas iniciativas</li>
+            <li>Alfabetização digital e uso de ferramentas online</li>
+            <li>Mentoria, acompanhamento e encaminhamento local</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h2>Impacto esperado</h2>
+          <p class="lead">Com a capacitação, esperamos aumentar a empregabilidade, fomentar microempreendimentos e fortalecer o tecido social nas áreas mais vulneráveis de Palmas. Cada participante capacitado é uma semente para transformação na comunidade.</p>
+        </div>
+
+        <div class="section">
+          <h2>Como participar</h2>
+          <p class="lead">Se você mora em Palmas e quer participar, clique no botão abaixo para iniciar seu cadastro. O processo é simples e gratuito.</p>
+        </div>
+
+        <div class="cta">
+          <a href="index.html">
+            <button class="join-button">Cadastrar!</button>
+          </a>
+        </div>
+      </section>
+
+      <aside class="hero-stats content-wrap">
+        <div class="progress-card">
+          <h3>Parceiros</h3>
+          <p class="lead">ONGs locais, empresas e voluntários podem colaborar com materiais, espaço e formação.</p>
+        </div>
+        <div class="progress-card">
+          <h3>Voluntariado</h3>
+          <p class="lead">Se você tem habilidade para ensinar, junte-se ao nosso time de instrutores.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer">
+      <span>ASMOSUL Project</span>
+      <span>Site matéria Front-End.</span>
+    </footer>
+</body>
 </html>

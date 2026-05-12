@@ -27,22 +27,45 @@ function openCity(evt, cityName) {
   }
 
   target.style.display = "block";
-  evt.currentTarget.className += " active";
+  if (evt && evt.currentTarget) {
+    evt.currentTarget.className += " active";
+  }
 }
 
 function Sim(event) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  const cadastroForm = document.getElementById('cadastroForm');
-  const navConta = document.getElementById('navConta');
+  const flow = [
+    { formId: 'cadastroForm', nextButtonId: 'navConta' },
+    { formId: 'contaForm', nextButtonId: 'navPerfil' },
+    { formId: 'perfilForm', nextButtonId: 'navQuadra' },
+    { formId: 'quadraForm', nextButtonId: 'navFaixaRenda' },
+    { formId: 'faixaRendaForm', nextButtonId: 'navComorbidade' },
+    { formId: 'comorbidadeForm', nextButtonId: 'navCategoria' },
+    { formId: 'categoriaForm', nextButtonId: null }
+  ];
 
-  if (cadastroForm && navConta) {
-    cadastroForm.addEventListener('submit', function(e) {
+  flow.forEach(function(step) {
+    const form = document.getElementById(step.formId);
+    if (!form) {
+      return;
+    }
+
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      navConta.click();
+
+      if (step.nextButtonId) {
+        const nextButton = document.getElementById(step.nextButtonId);
+        if (nextButton) {
+          nextButton.click();
+        }
+        return;
+      }
+
+      alert('Cadastro concluído com sucesso!');
     });
-  }
+  });
 
   const select = document.getElementById('Sim');
   const detalhes = document.getElementById('comorbidadeDetalhes');
@@ -103,19 +126,22 @@ document.addEventListener('DOMContentLoaded', function() {
       contaForm.addEventListener('submit', function(e) {
         const checks = getChecks(senha.value);
         const allGood = Object.values(checks).every(Boolean);
+
         if (!allGood) {
           e.preventDefault();
+          e.stopImmediatePropagation();
           renderFeedback(senha.value);
           senha.focus();
           senha.reportValidity();
           return;
         }
+
         if (senha.value !== senhaC.value) {
           e.preventDefault();
+          e.stopImmediatePropagation();
           senhaC.setCustomValidity('Senhas diferentes');
           senhaC.reportValidity();
           senhaC.focus();
-          return;
         }
       });
     }
