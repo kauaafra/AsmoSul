@@ -9,16 +9,14 @@ function mascaraTelefone(event) {
 }
 
 function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
+  const tabcontent = document.getElementsByClassName("tabcontent");
+  for (let i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
 
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  const tablinks = document.getElementsByClassName("tablinks");
+  for (let i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active");
   }
 
   const target = document.getElementById(cityName);
@@ -28,42 +26,86 @@ function openCity(evt, cityName) {
 
   target.style.display = "block";
   if (evt && evt.currentTarget) {
-    evt.currentTarget.className += " active";
+    evt.currentTarget.classList.add("active");
   }
 }
 
-function Sim(event) {
-}
+function setupWizard(form) {
+  const steps = Array.from(form.querySelectorAll('.wizard-step'));
+  const backButton = form.querySelector('.wizard-back');
+  const nextButton = form.querySelector('.wizard-next');
+  const submitButton = form.querySelector('.wizard-submit');
 
-document.addEventListener('DOMContentLoaded', function() {
-  const flow = [
-    { formId: 'cadastroForm', nextButtonId: 'navConta' },
-    { formId: 'contaForm', nextButtonId: 'navPerfil' },
-    { formId: 'perfilForm', nextButtonId: 'navQuadra' },
-    { formId: 'quadraForm', nextButtonId: 'navFaixaRenda' },
-    { formId: 'faixaRendaForm', nextButtonId: 'navComorbidade' },
-    { formId: 'comorbidadeForm', nextButtonId: 'navCategoria' },
-    { formId: 'categoriaForm', nextButtonId: null }
-  ];
+  if (!steps.length) {
+    return;
+  }
 
-  flow.forEach(function(step) {
-    const form = document.getElementById(step.formId);
-    if (!form) {
-      return;
+  let currentStep = 0;
+
+  function renderStep() {
+    steps.forEach(function(step, index) {
+      step.classList.toggle('is-active', index === currentStep);
+    });
+
+    if (backButton) {
+      backButton.hidden = currentStep === 0;
     }
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
+    if (nextButton) {
+      nextButton.hidden = currentStep === steps.length - 1;
+    }
 
-      if (step.nextButtonId) {
-        const nextButton = document.getElementById(step.nextButtonId);
-        if (nextButton) {
-          nextButton.click();
+    if (submitButton) {
+      submitButton.hidden = currentStep !== steps.length - 1;
+    }
+  }
+
+  function currentFields() {
+    return Array.from(steps[currentStep].querySelectorAll('input, select, textarea'));
+  }
+
+  if (backButton) {
+    backButton.addEventListener('click', function() {
+      if (currentStep > 0) {
+        currentStep -= 1;
+        renderStep();
+      }
+    });
+  }
+
+  if (nextButton) {
+    nextButton.addEventListener('click', function() {
+      const valid = currentFields().every(function(field) {
+        return field.checkValidity();
+      });
+
+      if (!valid) {
+        const firstInvalid = currentFields().find(function(field) {
+          return !field.checkValidity();
+        });
+
+        if (firstInvalid) {
+          firstInvalid.reportValidity();
+          firstInvalid.focus();
         }
         return;
       }
 
-      alert('Cadastro concluído com sucesso!');
+      if (currentStep < steps.length - 1) {
+        currentStep += 1;
+        renderStep();
+      }
+    });
+  }
+
+  renderStep();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const tabButtons = document.querySelectorAll('.auth-nav .tablinks');
+  tabButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      openCity(event, button.dataset.target);
     });
   });
 
@@ -80,7 +122,24 @@ document.addEventListener('DOMContentLoaded', function() {
     if (select.value === 'sim') detalhes.style.display = 'block';
   }
 
-  const contaForm = document.getElementById('contaForm');
+  const cadastroForm = document.getElementById('cadastroWizard');
+  const loginForm = document.getElementById('loginForm');
+  if (cadastroForm) {
+    setupWizard(cadastroForm);
+    cadastroForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Cadastro concluído com sucesso!');
+    });
+  }
+
+  if (loginForm) {
+    setupWizard(loginForm);
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Login enviado com sucesso!');
+    });
+  }
+
   const senha = document.getElementById('senha');
   const senhaC = document.getElementById('senhaC');
   const feedback = document.getElementById('passwordFeedback');
@@ -122,8 +181,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    if (contaForm) {
-      contaForm.addEventListener('submit', function(e) {
+    if (cadastroForm) {
+      cadastroForm.addEventListener('submit', function(e) {
         const checks = getChecks(senha.value);
         const allGood = Object.values(checks).every(Boolean);
 

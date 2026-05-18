@@ -1,289 +1,190 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Entre</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro</title>
     <link rel="icon" type="image/png" href="./Imagens/Logo-clean.png">
-    <script src="./JavaScript/index.js"></script>
+    <script src="./JavaScript/index.js" defer></script>
     <link rel="stylesheet" href="./Css/index.css">
 </head>
 <body>
-    <header class="topbar">
-        <a class="brand" href="#">
+    <header class="topbar auth-topbar">
+        <a class="brand" href="#" aria-label="ASMOSUL">
             <img src="./Imagens/Logo.png" alt="AsmoSul Logo" class="logo-img">
         </a>
-        <nav class="nav">
-            <button type="button" id="navCadastrar" class="tablinks active" onclick="openCity(event, 'Cadastrar')">Cadastrar</button>
-            <button type="button" id="navConta" class="tablinks" onclick="openCity(event, 'Conta')">Conta</button>
-            <button type="button" id="navPerfil" class="tablinks" onclick="openCity(event, 'Perfil')">Perfil</button>
-            <button type="button" id="navQuadra" class="tablinks" onclick="openCity(event, 'Quadra')">Quadra</button>
-            <button type="button" id="navFaixaRenda" class="tablinks" onclick="openCity(event, 'FaixaRenda')">Faixa de renda</button>
-            <button type="button" id="navComorbidade" class="tablinks" onclick="openCity(event, 'Comorbidade')">Comorbidade</button>
-            <button type="button" id="navCategoria" class="tablinks" onclick="openCity(event, 'Categoria')">Categoria</button>
+        <nav class="nav auth-nav" aria-label="Alternar entre cadastro e login">
+            <button type="button" class="tablinks active" data-target="Cadastro">Cadastro</button>
+            <button type="button" class="tablinks" data-target="Entre">Entre</button>
         </nav>
     </header>
 
-    <main class="hero">
-        <div class="hero-content">
-            <section class="hero-copy">
-                <span class="badge">Projeto ASMOSUL</span>
-                <h1>Comunidade, cuidado e participação em um só lugar.</h1>
-                <p>
-                    Conectamos pessoas e recursos para fortalecer famílias e iniciativas locais em Palmas — TO. Oferecemos formação, apoio social e oportunidades para gerar renda e melhorar a qualidade de vida na comunidade.
-                </p>
-                <div class="actions">
-                    <button type="button" class="primary-button" onclick="openCity(event, 'Conta')">Associar-se</button>
-                    <button type="button" class="secondary-button" onclick="openCity(event, 'Perfil')">Ver projetos</button>
+    <main class="hero auth-hero">
+        <div class="hero-content auth-content">
+            <section id="Cadastro" class="tabcontent progress-card auth-panel" style="display:block;">
+                <div class="panel-head">
+                    <h1>Cadastro</h1>
                 </div>
+
+                <form id="cadastroWizard" class="wizard" action="#">
+                    <div class="wizard-step is-active" data-step="1">
+                        <div>
+                            <label for="nome">Nome *</label>
+                            <input type="text" name="nome" id="nome" required>
+                        </div>
+                        <div>
+                            <label for="telefone">Telefone *</label>
+                            <input type="tel" name="telefone" id="telefone" maxlength="15" onkeyup="mascaraTelefone(event)" placeholder="(##) #####-####" required>
+                        </div>
+                        <div>
+                            <label for="idade">Idade *</label>
+                            <input type="number" name="idade" id="idade" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="wizard-step" data-step="2">
+                        <div>
+                            <label for="cpf">CPF *</label>
+                            <input type="text" name="cpf" id="cpf" minlength="11" maxlength="14" required>
+                        </div>
+                        <div>
+                            <label for="date">Data de nascimento *</label>
+                            <input type="date" name="date" id="date" required>
+                        </div>
+                        <div>
+                            <label for="sexo">Sexo</label>
+                            <select name="sexo" id="sexo">
+                                <option value="">Selecione</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="wizard-step" data-step="3">
+                        <div>
+                            <label for="email">E-mail *</label>
+                            <input type="email" name="email" id="email" required>
+                        </div>
+                        <div>
+                            <label for="escolaridade">Escolaridade</label>
+                            <select name="escolaridade" id="escolaridade">
+                                <option value="">Selecione</option>
+                                <option value="analfabeto">Analfabeto</option>
+                                <option value="ensino fundamental incompleto">Ensino fundamental incompleto</option>
+                                <option value="ensino fundamental completo">Ensino fundamental completo</option>
+                                <option value="ensino medio incompleto">Ensino medio incompleto</option>
+                                <option value="ensino medio completo">Ensino medio completo</option>
+                                <option value="ensino superior incompleto">Ensino superior incompleto</option>
+                                <option value="ensino superior completo">Ensino superior completo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="profissao">Profissao</label>
+                            <input type="text" name="profissao" id="profissao">
+                        </div>
+                    </div>
+
+                    <div class="wizard-step" data-step="4">
+                        <div>
+                            <label for="quadra">Quadra</label>
+                            <input type="text" name="quadra" id="quadra">
+                        </div>
+                        <div>
+                            <label for="rua">Rua</label>
+                            <input type="text" name="rua" id="rua">
+                        </div>
+                        <div>
+                            <label for="lote">Lote</label>
+                            <input type="text" name="lote" id="lote">
+                        </div>
+                        <div>
+                            <label for="complemento">Complemento de endereco</label>
+                            <input type="text" name="complemento" id="complemento">
+                        </div>
+                    </div>
+
+                    <div class="wizard-step" data-step="5">
+                        <div>
+                            <label for="Renda">Renda familiar</label>
+                            <select name="Renda" id="Renda">
+                                <option value="">Selecione</option>
+                                <option value="2000">Ate R$2000,00</option>
+                                <option value="4000">Ate R$4000,00</option>
+                                <option value="8000">Ate R$8000,00</option>
+                                <option value="10000">Ate R$10000,00</option>
+                                <option value="11000">Acima de R$10000,00</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="Sim">Possui comorbidades?</label>
+                            <select name="comorbidade" id="Sim">
+                                <option value="">Selecione</option>
+                                <option value="sim">Sim</option>
+                                <option value="nao">Nao</option>
+                            </select>
+                            <div id="comorbidadeDetalhes" style="display:none; margin-top:8px;">
+                                <label for="detalhes">Quais comorbidades?</label>
+                                <input type="text" name="detalhes" id="detalhes" placeholder="Descreva aqui">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wizard-step" data-step="6">
+                        <div>
+                            <label for="nomeUsuario">Nome de usuario *</label>
+                            <input type="text" name="nomeUsuario" id="nomeUsuario" required>
+                        </div>
+                        <div>
+                            <label for="senha">Senha *</label>
+                            <input type="password" name="senha" id="senha" required minlength="8">
+                        </div>
+                        <div>
+                            <label for="senhaC">Confirmar senha *</label>
+                            <input type="password" name="senhaC" id="senhaC" required minlength="8">
+                        </div>
+                        <div id="passwordFeedback" aria-live="polite"></div>
+                    </div>
+
+                    <div class="wizard-actions">
+                        <button type="button" class="secondary-button wizard-back" hidden>Voltar</button>
+                        <button type="button" class="primary-button wizard-next">Avancar</button>
+                        <button type="submit" class="primary-button wizard-submit" hidden>Finalizar cadastro</button>
+                    </div>
+                </form>
             </section>
 
-            <section class="hero-stats">
-                <section id="Cadastrar" class="tabcontent progress-card" style="display:block;">
-                    <h2>Cadastro</h2>
-                    <p>Preencha seus dados principais para seguir.</p>
-                    <form id="cadastroForm" action="./index.html" method="post" target="_blank">
-                <div class="DivNome">
-                    <label for="nome">Nome *</label>
-                    <input type="text" name="nome" required>
+            <section id="Entre" class="tabcontent progress-card auth-panel">
+                <div class="panel-head">
+                    <h1>Entre</h1>
                 </div>
-                <div>
-                    <label for="cpf">CPF *</label>
-                    <input type="text" name="cpf" minlength="11" maxlength="14" required>
-                </div>
-                <div>
-                    <label for="date">Data de nascimento *</label>
-                    <input type="date" name="date" required>
-                </div>
-                <div>
-                    <label for="sexo">Sexo</label>
-                    <select name="select">
-                        <option value="sexo">  </option>
-                        <option value="masculino">Masculino</option>
-                        <option value="feminino">Feminino</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="telefone">Telefone</label>
-                    <input type="tel" name="telefone" maxlength="15"
-                    onkeyup="mascaraTelefone(event)"
-                    placeholder="(##) #####-####">
-                </div>
-                <div>
-                    <label for="email">E-Mail *</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div>
-                    <label for="escolaridade">Escolaridade</label>
-                    <select name="select">
-                        <option value="escolaridade"> - </option>
-                        <option value="analfabeto">Analfabeto</option>
-                        <option value="ensino fundamental incompleto">Ensino fundamental incompleto</option>
-                        <option value="ensino fundamental completo">Ensino fundamental completo</option>
-                        <option value="ensino médio incompleto">Ensino médio incompleto</option>
-                        <option value="ensino médio completo">Ensino médio completo</option>
-                        <option value="ensino superior incompleto">Ensino superior incompleto</option>
-                        <option value="ensino superior completo">Ensino superior completo</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="profissao">Profissão</label>
-                    <input type="text" name="profissao">
-                </div>
-                <div>
-                    <label for="quadra">Quadra</label>
-                    <input type="text" name="quadra">
-                </div>
-                <div>
-                    <label for="rua">Rua</label>
-                    <input type="text" name="Rua">
-                </div>
-                <div>
-                    <label for="lote">Lote</label>
-                    <input type="text" name="lote">
-                </div>
-                <div>
-                    <label for="Complemento de Endereço">Complemento de Endereço</label>
-                    <input type="text" name="Complemento de Endereço">
-                </div>
-                <div>
-                    <label for="Renda">Renda Familiar</label>
-                    <select name="Renda">
-                        <option value="Renda"> - </option>
-                        <option value="2000">Até R$2000,00</option>
-                        <option value="4000">Até R$4000,00</option>
-                        <option value="8000">Até R$8000,00</option>
-                        <option value="10000">Até R$10000,00</option>
-                        <option value="11000">Acima de R$10000,00</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="comorbidade">Possui comorbidades?</label>
-                    <select name="comorbidade" id="Sim">
-                        <option value="comorbidade">  </option>
-                        <option value="sim">Sim</option>
-                        <option value="nao">Não</option>
-                    </select>
-                    <div id="comorbidadeDetalhes" style="display:none; margin-top:8px;">
-                        <label for="detalhes">Quais comorbidades?</label>
-                        <input type="text" name="detalhes" id="detalhes" placeholder="Descreva aqui">
+
+                <form id="loginForm" class="wizard" action="#">
+                    <div class="wizard-step is-active" data-step="1">
+                        <div>
+                            <label for="loginUser">Usuario *</label>
+                            <input type="text" name="loginUser" id="loginUser" required>
+                        </div>
+                        <div>
+                            <label for="loginSenha">Senha *</label>
+                            <input type="password" name="loginSenha" id="loginSenha" required minlength="8">
+                        </div>
                     </div>
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Avançar">
-                </div>
-            </form>
-        </section>
 
-                <section id="Conta" class="tabcontent progress-card">
-                    <h2>Conta</h2>
-                    <p>Crie sua senha com confirmação e critérios visíveis.</p>
-                    <form id="contaForm" action="#">
-                <div>
-                    <label for="associada">Pessoa associada</label>
-                    <select name="associada" id="">
-                        <option value="associada">  </option>
-                        <option value="sim">Sim</option>
-                        <option value="nao">Não</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="nome">Nome do usúario *</label>
-                    <input type="text" name="nome" required>
-                </div>
-                <div>
-                    <label for="senha">Senha *</label>
-                    <input type="password" name="senha" id="senha" required minlength="8">
-                </div>
-                <div>
-                    <label for="senhaC">Confirmar Senha *</label>
-                    <input type="password" name="senhaC" id="senhaC" required minlength="8">
-                </div>
-                <div id="passwordFeedback" aria-live="polite" style="margin-top:8px;"></div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Avançar">
-                </div>
-            </form>
-                </section>
-
-                <section id="Perfil" class="tabcontent progress-card">
-                    <h2>Perfil</h2>
-                    <p>Configure seus dados de perfil e permissões.</p>
-                    <form id="perfilForm" action="#">
-                <div>
-                    <label for="identificador">Identificador *</label>
-                    <input type="text" name="identificador" id="identificador" required>
-                </div>
-                <div>
-                    <label for="descricao">Descrição *</label>
-                    <input type="text" name="descricao" id="descricao" required>
-                </div>
-                <div>
-                    <label for="permissoes">Permissões *</label>
-                    <select name="permissoes" id="permissoes" required>
-                        <option value=""> - </option>
-                        <option value="admin">Administrador</option>
-                        <option value="user">Usuário</option>
-                        <option value="viewer">Visualizador</option>
-                        <option value="editor">Editor</option>
-                    </select>
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Salvar">
-                </div>
-            </form>
-                </section>
-
-                <section id="Quadra" class="tabcontent progress-card">
-                    <h2>Quadra</h2>
-                    <p>Cadastre a quadra com nome e descrição.</p>
-                    <form id="quadraForm" action="#">
-                <div>
-                    <label for="nomeQuadra">Nome da quadra *</label>
-                    <input type="text" name="nomeQuadra" id="nomeQuadra" required>
-                </div>
-                <div>
-                    <label for="descricaoQuadra">Descrição</label>
-                    <input type="text" name="descricaoQuadra" id="descricaoQuadra">
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Salvar">
-                </div>
-            </form>
-                </section>
-
-                <section id="FaixaRenda" class="tabcontent progress-card">
-                    <h2>Faixa de renda familiar</h2>
-                    <p>Informe a faixa com valor mínimo, valor máximo e descrição.</p>
-                    <form id="faixaRendaForm" action="#">
-                <div>
-                    <label for="valorMinimo">Valor mínimo *</label>
-                    <input type="number" name="valorMinimo" id="valorMinimo" step="1" min="0" required>
-                </div>
-                <div>
-                    <label for="valorMaximo">Valor máximo *</label>
-                    <input type="number" name="valorMaximo" id="valorMaximo" step="1" min="0" required>
-                </div>
-                <div>
-                    <label for="descricaoFaixa">Descrição</label>
-                    <input type="text" name="descricaoFaixa" id="descricaoFaixa">
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Salvar">
-                </div>
-            </form>
-                </section>
-
-                <section id="Comorbidade" class="tabcontent progress-card">
-                    <h2>Comorbidade</h2>
-                    <p>Cadastre uma comorbidade e associe uma categoria.</p>
-                    <form id="comorbidadeForm" action="#">
-                <div>
-                    <label for="nomeComorbidade">Nome *</label>
-                    <input type="text" name="nomeComorbidade" id="nomeComorbidade" required>
-                </div>
-                <div>
-                    <label for="categoriaComorbidade">Categoria *</label>
-                    <select name="categoriaComorbidade" id="categoriaComorbidade" required>
-                        <option value=""> - </option>
-                        <option value="Doenças cardiovasculares">Doenças cardiovasculares</option>
-                        <option value="Diabetes">Diabetes</option>
-                        <option value="Doenças respiratorias">Doenças respiratórias</option>
-                        <option value="Cancer">Câncer</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="descricaoComorbidade">Descrição</label>
-                    <input type="text" name="descricaoComorbidade" id="descricaoComorbidade">
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Cadastrar">
-                </div>
-            </form>
-                </section>
-
-                <section id="Categoria" class="tabcontent progress-card">
-                    <h2>Categoria</h2>
-                    <p>Cadastre a categoria com identificador e nome.</p>
-                    <form id="categoriaForm" action="#">
-                <div>
-                    <label for="identificadorCategoria">Identificador *</label>
-                    <input type="text" name="identificadorCategoria" id="identificadorCategoria" required>
-                </div>
-                <div>
-                    <label for="nomeCategoria">Nome *</label>
-                    <input type="text" name="nomeCategoria" id="nomeCategoria" required>
-                </div>
-                <div class="BotoesForm">
-                    <input type="submit" value="Salvar">
-                </div>
-            </form>
-                </section>
+                    <div class="wizard-actions">
+                        <button type="button" class="secondary-button wizard-back" hidden>Voltar</button>
+                        <button type="submit" class="primary-button wizard-submit">Entrar</button>
+                    </div>
+                </form>
             </section>
         </div>
     </main>
-        <footer class="site-footer">
-            <span>ASMOSUL Project</span>
-            <span>Site matéria Front-End.</span>
-        </footer>
-        </body>
+
+    <footer class="site-footer">
+        <span>ASMOSUL Project</span>
+        <span>Site materia Front-End.</span>
+    </footer>
+</body>
 </html>
+
