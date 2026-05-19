@@ -129,6 +129,11 @@ document.addEventListener('DOMContentLoaded', function() {
     cadastroForm.addEventListener('submit', function(e) {
       e.preventDefault();
       alert('Cadastro concluído com sucesso!');
+      cadastroForm.reset();
+      const entreButton = document.querySelector('[data-target="Entre"]');
+      if (entreButton) {
+        entreButton.click();
+      }
     });
   }
 
@@ -137,6 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loginForm.addEventListener('submit', function(e) {
       e.preventDefault();
       alert('Login enviado com sucesso!');
+      window.location.href = './index.html';
     });
   }
 

@@ -4,6 +4,7 @@
   --line: #e8eef2;
   --white: #ffffff;
   --blue: #289ccf;
+  --blue-700: #0f6f9a;
   --blue-light: #eaf8ff;
   --green-soft: #efffd4;
   --shadow: 0 18px 36px rgb(23 25 28 / 8%);
@@ -51,6 +52,12 @@ a {
   gap: 28px;
 }
 
+.brand span {
+  color: var(--blue-700);
+  font-size: 36px;
+  line-height: 1;
+}
+
 .logo-img {
   height: 110px;
   width: auto;
@@ -68,7 +75,7 @@ a {
 
 .nav button:not(.join-button) {
   position: relative;
-  padding: 12px 0;
+  padding: 12px;
   border: 0;
   background: transparent;
   font-weight: 700;
@@ -502,12 +509,33 @@ h1 {
 .site-footer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 18px clamp(24px, 5vw, 104px);
-  background: var(--white);
+  align-items: flex-start;
+  gap: 28px;
+  padding: 34px clamp(18px, 6vw, 88px);
+  color: #4d555f;
   border-top: 1px solid var(--line);
+  background: #f6fafc;
+  font-size: 14px;
+}
+
+.footer-info,
+.footer-links {
+  display: grid;
+  gap: 6px;
+}
+
+.footer-info strong {
+  color: var(--blue-700);
+  font-size: 24px;
+}
+
+.footer-info span,
+.footer-links span {
   color: var(--muted);
-  font-weight: 700;
+}
+
+.footer-links {
+  text-align: right;
 }
 
 @media (max-width: 560px) {
@@ -515,5 +543,9 @@ h1 {
     flex-direction: column;
     gap: 8px;
     align-items: flex-start;
+  }
+
+  .footer-links {
+    text-align: left;
   }
 }
