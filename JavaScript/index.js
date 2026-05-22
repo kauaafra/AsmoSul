@@ -8,6 +8,15 @@ function mascaraTelefone(event) {
     input.value = valor;
 }
 
+function mascaraCPF(event) {
+  const input = event.target;
+  let v = input.value.replace(/\D/g, '').slice(0, 11);
+  v = v.replace(/(\d{3})(\d)/, '$1.$2');
+  v = v.replace(/(\d{3})(\d)/, '$1.$2');
+  v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  input.value = v;
+}
+
 function openCity(evt, cityName) {
   const tabcontent = document.getElementsByClassName("tabcontent");
   for (let i = 0; i < tabcontent.length; i++) {
@@ -42,6 +51,34 @@ function setupWizard(form) {
 
   let currentStep = 0;
 
+  // localizar o container de progresso dentro da mesma seção do form
+  const section = form.closest('section');
+  const progressContainer = section ? section.querySelector('.progress-steps') : null;
+
+  function ensureProgressBoxes() {
+    if (!progressContainer) return;
+    const existing = progressContainer.querySelectorAll('.step-box');
+    if (existing.length === 0) {
+      for (let i = 0; i < 7; i++) {
+        const d = document.createElement('div');
+        d.className = 'step-box';
+        d.dataset.index = (i + 1).toString();
+        progressContainer.appendChild(d);
+      }
+    }
+  }
+
+  function updateProgressBoxes() {
+    if (!progressContainer) return;
+    const boxes = Array.from(progressContainer.querySelectorAll('.step-box'));
+    const boxesLen = boxes.length || 7;
+    const ratio = steps.length > 1 ? currentStep / (steps.length - 1) : 1;
+    const filled = Math.round(ratio * (boxesLen - 1)) + 1;
+    boxes.forEach(function(b, i) {
+      b.classList.toggle('filled', (i + 1) <= filled);
+    });
+  }
+
   function renderStep() {
     steps.forEach(function(step, index) {
       step.classList.toggle('is-active', index === currentStep);
@@ -58,6 +95,8 @@ function setupWizard(form) {
     if (submitButton) {
       submitButton.hidden = currentStep !== steps.length - 1;
     }
+
+    updateProgressBoxes();
   }
 
   function currentFields() {
@@ -98,6 +137,7 @@ function setupWizard(form) {
     });
   }
 
+  ensureProgressBoxes();
   renderStep();
 }
 
@@ -126,6 +166,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const loginForm = document.getElementById('loginForm');
   if (cadastroForm) {
     setupWizard(cadastroForm);
+    const cpfInput = document.getElementById('cpf');
+    if (cpfInput) {
+      cpfInput.addEventListener('input', mascaraCPF);
+    }
     cadastroForm.addEventListener('submit', function(e) {
       e.preventDefault();
       alert('Cadastro concluído com sucesso!');

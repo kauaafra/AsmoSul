@@ -27,6 +27,16 @@
                     <h1>Cadastro</h1>
                 </div>
 
+                <div class="progress-steps" aria-hidden="false">
+                    <div class="step-box filled" data-index="1" aria-hidden="true"></div>
+                    <div class="step-box" data-index="2" aria-hidden="true"></div>
+                    <div class="step-box" data-index="3" aria-hidden="true"></div>
+                    <div class="step-box" data-index="4" aria-hidden="true"></div>
+                    <div class="step-box" data-index="5" aria-hidden="true"></div>
+                    <div class="step-box" data-index="6" aria-hidden="true"></div>
+                    <div class="step-box" data-index="7" aria-hidden="true"></div>
+                </div>
+
                 <form id="cadastroWizard" class="wizard" action="#">
                     <div class="wizard-step is-active" data-step="1">
                         <div>
@@ -46,11 +56,11 @@
                     <div class="wizard-step" data-step="2">
                         <div>
                             <label for="cpf">CPF *</label>
-                            <input type="text" name="cpf" id="cpf" minlength="11" maxlength="14" required>
+                            <input type="text" name="cpf" id="cpf" minlength="11" maxlength="14" placeholder="000.000.000-00" inputmode="numeric" required>
                         </div>
                         <div>
                             <label for="date">Data de nascimento *</label>
-                            <input type="date" name="date" id="date" required>
+                            <input type="date" name="date" id="date" required maxlength="10">
                         </div>
                         <div>
                             <label for="sexo">Sexo</label>
